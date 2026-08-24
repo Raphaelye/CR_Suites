@@ -5,7 +5,7 @@ import  { IoHomeOutline, IoFlashOutline, IoBriefcaseOutline } from "react-icons/
 function Navbar() {
   return (
     <nav
-      className="fixed bottom-8 left-1/2 z-100 flex w-[calc(100%-2rem)] max-w-108 -translate-x-1/2 items-center rounded-full border border-white/20 bg-black/80 p-1 shadow-2xl shadow-black/50 backdrop-blur-sm lg:bottom-8"
+      className="fixed bottom-8 left-1/2 z-100 flex w-[calc(100%-2rem)] max-w-108 -translate-x-1/2 items-center rounded-full border border-white/20 bg-glass-bg p-1 shadow-2xl shadow-black/50 backdrop-blur-sm lg:bottom-8"
       aria-label="Primary navigation"
     >
       <a
