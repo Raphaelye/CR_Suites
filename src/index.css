@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  --color-black: #000;
+  --color-bg: #020202;
+  --color-white: #fff;
+  --color-accent: #E8D5B7;
+  --color-border: rgba(100, 100, 100, 0.2);
+  --color-glass-bg: rgba(100, 100, 100, 0.06);
+  --color-muted: #B0B0B0;
+  --color-active: #08F72C;
+  --font-display: 'Special Gothic', 'Space Grotesk', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+}
+
+:root {
+  --page-padding: clamp(1.25rem, 5vw, 6rem);
+}
+
+/* Space Grotesk */
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/src/assets/fonts/SpaceGrotesk-Light.woff2') format('woff2');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/src/assets/fonts/SpaceGrotesk-Regular.woff2') format('woff2');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/src/assets/fonts/SpaceGrotesk-Medium.woff2') format('woff2');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/src/assets/fonts/SpaceGrotesk-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/src/assets/fonts/SpaceGrotesk-Bold.woff2') format('woff2');
+  font-weight: 700;
+}
+
+/* Special Gothic - for headings only */
+@font-face {
+  font-family: 'Special Gothic';
+  src: url('/src/assets/fonts/SpecialGothicExpandedOne-Regular.woff2') format('woff2');
+  font-weight: 400;
+}
+
+/* Apply globally */
+body {
+  margin: 0;
+  background: var(--color-bg);
+}
+
+.page-padding {
+  padding-left: var(--page-padding);
+  padding-right: var(--page-padding);
+}
+
+/* Headings get the punch */
+h1, h2 {
+  font-family: 'Special Gothic', 'Space Grotesk', sans-serif;
+}
+
+p{
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+#root {
+  box-sizing: border-box;
+  margin: 0; 
+
+}
+
+
