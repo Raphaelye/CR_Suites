@@ -59,6 +59,7 @@
 body {
   margin: 0;
   background: var(--color-bg);
+  scrollbar-width: none;
 }
 
 .page-padding {
@@ -78,6 +79,7 @@ p{
 #root {
   box-sizing: border-box;
   margin: 0; 
+  scroll-behavior: smooth;
 
 }
 
