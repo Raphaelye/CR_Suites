@@ -1,18 +1,36 @@
 
+import { useEffect } from "react"
+import { BrowserRouter, Route, Routes, useLocation } from "react-router"
 import Home from "./components/Home"
 import Navbar from "./components/Navbar"
 import TopNavbar from "./components/TopNavbar"
+import Tools from "./components/Tools"
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  return null
+}
 
 function App() {
   return (
-    <main className="overflow-x-hidden bg-bg text-white ">
-      <TopNavbar />
-      <Home />
-      <Navbar />
-    </main>
+    <BrowserRouter>
+      <ScrollToTop />
+      <main className="overflow-x-hidden bg-bg text-white ">
+        <TopNavbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/tools" element={<Tools />} />
+          
+        </Routes>
+        <Navbar />
+      </main>
+    </BrowserRouter>
   )
 }
-
-
 
 export default App;

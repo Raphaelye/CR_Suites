@@ -59,6 +59,7 @@
 body {
   margin: 0;
   background: var(--color-bg);
+  
 }
 
 .page-padding {
@@ -73,6 +74,11 @@ h1, h2 {
 
 p{
   font-family: 'Space Grotesk', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
 }
 
 #root {
