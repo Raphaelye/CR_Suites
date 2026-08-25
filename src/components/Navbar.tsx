@@ -38,7 +38,7 @@ function Navbar() {
 
       <Link
         className={`font-body relative flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full px-2 py-2.5 text-xs font-bold transition-colors bg-blend-difference sm:gap-2 sm:px-5 sm:text-sm ${isProjects ? "text-black" : "text-white hover:bg-white/10 hover:text-accent"}`}
-        to="/projects"
+        to="/"
         aria-current={isProjects ? "page" : undefined}
       >
         {isProjects && <motion.span className="absolute inset-0 z-0 rounded-full bg-white" layoutId="active-nav" transition={{ type: "spring", stiffness: 450, damping: 32 }} />}

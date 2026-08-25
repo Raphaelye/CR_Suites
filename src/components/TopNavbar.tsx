@@ -27,7 +27,7 @@ function TopNavbar() {
         />
         <Link
           className="font-body text-sm font-medium text-white transition-colors hover:text-accent md:text-md lg:text-base"
-          to="/contact"
+          to="/"
         >
           Open to Work
         </Link>
