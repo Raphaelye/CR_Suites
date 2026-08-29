@@ -31,7 +31,6 @@ export const useProjectsStore = create<ProjectsState>((set, get) => ({
     } catch (error) {
       set({
         isLoading: false,
-        hasFetched: true,
         error: error instanceof Error ? error.message : 'Projects could not be loaded.',
       })
     }

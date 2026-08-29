@@ -23,7 +23,7 @@ function ProjectCard({ projectId }: { projectId: string }) {
       variants={reveal}
       layout
     >
-      <div className="relative shrink-0 overflow-hidden bg-white/5 ">
+      <div className="relative shrink-0 overflow-hidden bg-white/5 aspect-video">
         {imageUrl ? (
           <img src={imageUrl} alt={project.title} className="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0" />
         ) : (
