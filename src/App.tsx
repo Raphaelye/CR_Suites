@@ -5,6 +5,7 @@ import Home from "./components/Home"
 import Navbar from "./components/Navbar"
 import TopNavbar from "./components/TopNavbar"
 import Tools from "./components/Tools"
+import Projects from "./components/Projects"
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -25,7 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/tools" element={<Tools />} />
-          
+          <Route path="/projects" element={<Projects />} />
         </Routes>
         <Navbar />
       </main>

@@ -18,14 +18,14 @@ export const disciplines: Discipline[] = [
     number: '01',
     title: 'Web development',
     description: 'Fast, expressive websites that give a good idea the room to become a real experience.',
-    tools: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Framer Motion'],
+    tools: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Framer Motion', 'Sanity'],
     icon: IoCodeSlashOutline,
   },
   {
     number: '02',
     title: 'Mobile development',
     description: 'Mobile products with a clear point of view, considered flows, and just enough motion.',
-    tools: ['React Native', 'Expo', 'Firebase', 'Figma', 'TypeScript'],
+    tools: ['React Native', 'Expo', 'Firebase', 'Figma', 'TypeScript', 'Sanity'],
     icon: IoPhonePortraitOutline,
   },
   {
@@ -40,5 +40,5 @@ export const disciplines: Discipline[] = [
 export const allTools = [
   'React', 'React Native', 'TypeScript', 'JavaScript', 'HTML', 'CSS',
   'Tailwind CSS', 'Vite', 'Figma', 'FigJam', 'Firebase', 'Expo',
-  'Framer Motion', 'Git', 'GitHub', 'Notion',
+  'Framer Motion', 'Git', 'GitHub', 'Sanity', 'Next.js'
 ]

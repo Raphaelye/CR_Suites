@@ -82,7 +82,7 @@ function Tools() {
             </div>
             <div className="flex max-w-3xl flex-wrap gap-2 sm:justify-end">
               {allTools.map((tool, index) => (
-                <span key={tool} className={`font-body px-4 py-3 text-xs uppercase tracking-widest ${index % 4 === 0 ? 'bg-accent text-black' : 'border border-white/20 text-white'}`}>{tool}</span>
+                <span key={tool} className={`font-body font-bold px-4 py-3 text-xs uppercase tracking-widest ${index % 4 === 0 ? 'bg-accent text-black' : 'border border-white/20 text-white'}`}>{tool}</span>
               ))}
             </div>
           </div>
