@@ -56,7 +56,7 @@ function Home() {
         <img
           src={bgAvatar}
           alt=""
-          className="pointer-events-none absolute bottom-0 right-[-55%] z-0 h-[90vh] max-w-none object-cover object-bottom opacity-65 sm:right-[-20%] sm:h-[90vh] lg:right-[4%] lg:h-[95vh]"
+          className="pointer-events-none absolute bottom-0 right-[-55%] z-0 h-[90vh] max-w-none object-cover object-bottom opacity-65 sm:right-[-20%] sm:h-[90vh] lg:right-[10%] lg:h-[95vh]"
         />
         <div className="pointer-events-none absolute inset-0 z-1 bg-[rgba(0,0,0,0.45)]" />
 
@@ -188,14 +188,14 @@ function Home() {
             <motion.div className="w-full" variants={heroItem}>
               <p className="font-body mb-4 text-sm uppercase tracking-[0.2em] text-accent">Who I am</p>
               <h2 className="font-display max-w-3xl text-4xl uppercase leading-[0.95] text-white sm:text-6xl lg:text-7xl">
-                I make ideas <span className="text-accent">look like</span> they belong in the future.
+                I turn ideas into <span className="text-accent">realities.</span>
               </h2>
               <div className="mt-8 flex flex-col gap-6 border-t border-white/15 pt-7 sm:flex-row sm:gap-10">
                 <p className="font-body min-w-0 flex-1 text-base leading-relaxed text-white/75 sm:text-lg">
                   I am a multidisciplinary creative who moves between strategy, visual identity, and code. My work is built for people with something real to say, helping them turn a rough spark into a clear, memorable experience.
                 </p>
                 <p className="font-body min-w-0 flex-1 text-sm leading-relaxed text-muted">
-                  Based in Akwa Ibom, Nigeria.<br />Working everywhere.<br /><br />Available for select collaborations.
+                  Based in Akwa Ibom, Nigeria.<br />Working everywhere.<br /><br /><span className='text-accent'>Available for collaborations.</span>
                 </p>
               </div>
             </motion.div>
