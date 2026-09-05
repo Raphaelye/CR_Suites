@@ -100,17 +100,17 @@ function Home() {
               <div className="flex-row gap-5 flex flex-wrap justify-start items-center">
                 <a
                   className="flex items-center gap-1 transition-colors hover:text-accent"
-                  href="tel:+23400000000"
+                  href="https://wa.me/+2348083044373"
                 >
                   <IoCallOutline size={22} className="shrink-0 text-accent" aria-hidden="true" />
-                  <span>+234 000- 000- 00</span>
+                  <span>+234 808-3044-373</span>
                 </a>
                 <a
                   className="flex items-center gap-1 transition-colors hover:text-accent"
-                  href="mailto:cleveraph27@gmail.com"
+                  href="mailto:cleveraph@gmail.com"
                 >
                   <IoMailOutline size={22} className="shrink-0 text-accent" aria-hidden="true" />
-                  <span>cleveraph27@gmail.com</span>
+                  <span>cleveraph@gmail.com</span>
                 </a>
               </div>
               <div className="flex items-center gap-1">
@@ -137,10 +137,10 @@ function Home() {
         </div>
 
 
-        {/* <div className="flex items-center justify-between pb-6 font-body text-xs uppercase tracking-[0.16em] text-white/50">
+        <div className="flex items-center justify-between pb-6 font-body text-xs uppercase tracking-[0.16em] text-white/50">
           <span>Independent creative studio</span>
           <span>01 / 04</span>
-        </div> */}
+        </div>
       </section>
 
 

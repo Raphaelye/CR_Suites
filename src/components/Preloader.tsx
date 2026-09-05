@@ -1,7 +1,9 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import crLogo from '../assets/CRlogo.png'
 
 function Preloader() {
+  const shouldReduceMotion = useReducedMotion()
+
   return (
     <motion.div
       className="fixed inset-0 z-1000 flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-bg text-white"
@@ -14,12 +16,12 @@ function Preloader() {
         <motion.div
           className="absolute inset-0 rounded-full border border-accent/20"
           animate={{ rotate: 360 }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+          transition={{ duration: 8, repeat: shouldReduceMotion ? 0 : Infinity, ease: 'linear' }}
         />
         <motion.div
           className="absolute inset-4 rounded-full border border-white/10 border-t-accent"
           animate={{ rotate: -360 }}
-          transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
+          transition={{ duration: 5, repeat: shouldReduceMotion ? 0 : Infinity, ease: 'linear' }}
         />
         
         <motion.img

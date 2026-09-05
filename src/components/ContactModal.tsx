@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useCallback, useEffect, useState, useRef } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { IoArrowForward, IoCloseOutline, IoMailOutline } from 'react-icons/io5'
 
@@ -12,34 +12,82 @@ type ContactModalProps = {
 
 function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const form = useRef<HTMLFormElement>(null)
+  const dialog = useRef<HTMLElement>(null)
+  const trigger = useRef<HTMLElement | null>(null)
 
   
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [isSent, setIsSent] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const submissionId = useRef(0)
+
+  const handleClose = useCallback(() => {
+    submissionId.current += 1
+    setIsSubmitting(false)
+    setFormData({ name: '', email: '', message: '' })
+    setIsSent(false)
+    setErrorMessage('')
+    onClose()
+  }, [onClose])
 
   useEffect(() => {
     if (!isOpen) return
 
+    trigger.current = document.activeElement instanceof HTMLElement ? document.activeElement : null
+
+    const focusableSelector = [
+      'a[href]',
+      'button:not([disabled])',
+      'input:not([disabled])',
+      'select:not([disabled])',
+      'textarea:not([disabled])',
+      '[tabindex]:not([tabindex="-1"])',
+    ].join(',')
+
+    const focusFrame = requestAnimationFrame(() => {
+      const focusableElements = dialog.current?.querySelectorAll<HTMLElement>(focusableSelector)
+      focusableElements?.[0]?.focus()
+      if (!focusableElements?.length) dialog.current?.focus()
+    })
+
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onClose()
+      if (event.key === 'Escape') handleClose()
+
+      if (event.key !== 'Tab' || !dialog.current) return
+
+      const focusableElements = dialog.current.querySelectorAll<HTMLElement>(focusableSelector)
+      if (!focusableElements.length) {
+        event.preventDefault()
+        dialog.current.focus()
+        return
+      }
+
+      const firstElement = focusableElements[0]
+      const lastElement = focusableElements[focusableElements.length - 1]
+      const currentElement = document.activeElement
+      const focusIsInsideDialog = dialog.current.contains(currentElement)
+
+      if (event.shiftKey && (!focusIsInsideDialog || currentElement === firstElement)) {
+        event.preventDefault()
+        lastElement.focus()
+      } else if (!event.shiftKey && (!focusIsInsideDialog || currentElement === lastElement)) {
+        event.preventDefault()
+        firstElement.focus()
+      }
     }
 
     document.body.style.overflow = 'hidden'
     document.addEventListener('keydown', handleKeyDown)
 
     return () => {
+      cancelAnimationFrame(focusFrame)
       document.body.style.overflow = ''
       document.removeEventListener('keydown', handleKeyDown)
+      trigger.current?.focus()
+      trigger.current = null
     }
-  }, [isOpen, onClose])
-
-  const handleClose = () => {
-    setFormData({ name: '', email: '', message: '' })
-    setIsSent(false)
-    setErrorMessage('')
-    onClose()
-  }
+  }, [isOpen, handleClose])
 
   const service_id = import.meta.env.VITE_SERVICE_ID;
   const template_id = import.meta.env.VITE_TEMPLATE_ID;
@@ -48,18 +96,30 @@ function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const sendEmail: NonNullable<React.ComponentProps<'form'>['onSubmit']> = (event) => {
     event.preventDefault()
 
-    if (!form.current) return
+    if (!form.current || isSubmitting) return
 
+    const currentSubmissionId = submissionId.current + 1
+    submissionId.current = currentSubmissionId
+    setIsSubmitting(true)
     setErrorMessage('')
 
     emailjs.sendForm(service_id, template_id, form.current, { publicKey: public_key })
       .then(() => {
+        if (submissionId.current !== currentSubmissionId) return
+
         setFormData({ name: '', email: '', message: '' })
         setIsSent(true)
       })
       .catch(() => {
+        if (submissionId.current !== currentSubmissionId) return
+
         setErrorMessage('Something went wrong. Please try again.')
         setIsSent(false)
+      })
+      .finally(() => {
+        if (submissionId.current !== currentSubmissionId) return
+
+        setIsSubmitting(false)
       })
   }
 
@@ -75,6 +135,7 @@ function ContactModal({ isOpen, onClose }: ContactModalProps) {
           onMouseDown={(event) => event.target === event.currentTarget && handleClose()}
         >
           <motion.aside
+            ref={dialog}
             className="relative flex h-full w-full flex-col overflow-y-auto border-l border-white/15 bg-[#0b0b0b] px-6 py-7 text-white shadow-2xl shadow-black/60 sm:px-10 sm:py-9 lg:w-[46vw] lg:px-14"
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
@@ -84,6 +145,7 @@ function ContactModal({ isOpen, onClose }: ContactModalProps) {
             role="dialog"
             aria-modal="true"
             aria-labelledby="contact-modal-title"
+            tabIndex={-1}
           >
             <div className="flex items-start justify-between pb-6">
               <div>
@@ -131,7 +193,7 @@ function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
                   {errorMessage && <p className="font-body text-sm text-red-400" role="alert">{errorMessage}</p>}
 
-                  <button type="submit" className="group mt-2 flex w-full items-center justify-between bg-accent px-5 py-4 font-body text-sm font-bold uppercase tracking-[0.14em] text-black transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
+                  <button type="submit" disabled={isSubmitting} className="group mt-2 flex w-full items-center justify-between bg-accent px-5 py-4 font-body text-sm font-bold uppercase tracking-[0.14em] text-black transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-60">
                     Start a conversation
                     <IoArrowForward className="transition-transform duration-300 group-hover:translate-x-2" size={20} aria-hidden="true" />
                   </button>

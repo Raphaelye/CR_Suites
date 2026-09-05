@@ -42,7 +42,7 @@ function App() {
     <BrowserRouter>
       <AnimatePresence>{isLoading && <Preloader />}</AnimatePresence>
       <ScrollToTop />
-      <main className="overflow-x-hidden bg-bg text-white ">
+      <main className="overflow-x-hidden bg-bg text-white" inert={isLoading} aria-busy={isLoading}>
         <TopNavbar onOpenContact={() => setIsContactOpen(true)} />
         <Routes>
           <Route path="/" element={<Home />} />
