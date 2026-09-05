@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@dtkn/ionicons": "^0.1.0",
+    "@emailjs/browser": "^4.4.1",
     "@reacticons/ionicons": "^7.1.0",
     "@sanity/client": "^8.3.0",
     "@sanity/image-url": "^2.1.1",

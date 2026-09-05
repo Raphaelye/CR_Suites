@@ -1,7 +1,11 @@
 import { Link } from 'react-router'
 import { motion } from 'framer-motion'
 
-function TopNavbar() {
+type TopNavbarProps = {
+  onOpenContact: () => void
+}
+
+function TopNavbar({ onOpenContact }: TopNavbarProps) {
   return (
     <nav
       className="fixed left-1/2 top-5 w-[90%] z-50 flex justify-between -translate-x-1/2 items-center gap-10 rounded-full px-4 py-3 backdrop-blur-xl sm:top-6 sm:gap-20 sm:px-6 sm:py-4"
@@ -25,12 +29,13 @@ function TopNavbar() {
           transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
           aria-hidden="true"
         />
-        <Link
-          className="font-body text-sm font-medium text-white transition-colors hover:text-accent md:text-md lg:text-base"
-          to="/"
+        <button
+          type="button"
+          className="font-body cursor-pointer text-sm font-medium text-white transition-colors hover:text-accent md:text-md lg:text-base"
+          onClick={onOpenContact}
         >
           Open to Work
-        </Link>
+        </button>
       </div>
     </nav>
   )

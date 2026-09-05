@@ -25,7 +25,7 @@ function ProjectCard({ projectId }: { projectId: string }) {
     >
       <div className="relative shrink-0 overflow-hidden bg-white/5 aspect-video">
         {imageUrl ? (
-          <img src={imageUrl} alt={project.title} className="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0" />
+          <img src={imageUrl} alt={project.title} className="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-101 group-hover:grayscale-0" />
         ) : (
           <div className="flex h-full items-center justify-center font-body text-xs uppercase tracking-[0.2em] text-muted">Image coming soon</div>
         )}
