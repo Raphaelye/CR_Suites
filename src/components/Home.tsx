@@ -89,8 +89,7 @@ function Home() {
               className="font-body mt-4 max-w-xl text-sm leading-relaxed text-white sm:text-lg "
               variants={heroItem}
             >
-              Make your difference feel visible.
-              We shape distinct brands and digital experiences for people building what comes next.
+              I specialize in creating fullstack and responsive websites, web applications, and mobile apps that meet the needs of businesses and individuals alike.
             </motion.p>
 
 
@@ -147,7 +146,6 @@ function Home() {
 
 {/* ABOUT SECTION ========================================================================*/}
       <section id="about" className="relative isolate min-h-dvh overflow-hidden bg-bg page-padding py-28 md:py-27 sm:py-25 lg:py-40 ">
-        {/* <div className="pointer-events-none absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] [background-size:5rem_5rem]" /> */}
         <div className="pointer-events-none absolute -right-24 top-2 h-72 w-72 rounded-full border border-accent/20 sm:h-100 sm:w-100" />
 
         <motion.div

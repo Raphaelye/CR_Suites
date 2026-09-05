@@ -22,7 +22,7 @@ function Tools() {
         >
           <div className="max-w-4xl">
             <p className="font-body mb-5 text-xs font-medium uppercase tracking-[0.28em] text-accent sm:text-sm">02 / How I build</p>
-            <h1 className="font-display text-4xl uppercase leading-[0.95] text-white sm:text-7xl lg:text-8xl">
+            <h1 className="font-display text-4xl uppercase leading-[0.95] text-white sm:text-7xl lg:text-6x">
               Ideas into <span className="text-accent">interfaces.</span>
             </h1>
           </div>
