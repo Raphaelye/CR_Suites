@@ -1,7 +1,6 @@
 
 import { motion } from 'framer-motion'
 import type { Variants } from 'framer-motion'
-import { IoArrowForward } from 'react-icons/io5'
 import { allTools, disciplines } from '../constants/tools'
 
 const reveal: Variants = {
@@ -54,7 +53,7 @@ function Tools() {
                     <Icon size={28} className="text-white transition-colors group-hover:text-accent" aria-hidden="true" />
                     <h3 className="font-display text-2xl uppercase text-white sm:text-3xl">{title}</h3>
                   </div>
-                  <IoArrowForward className="text-muted transition-transform duration-300 group-hover:translate-x-2 group-hover:text-accent lg:hidden" size={22} aria-hidden="true" />
+                  {/* <IoArrowForward className="text-muted transition-transform duration-300 group-hover:translate-x-2 group-hover:text-accent lg:hidden" size={22} aria-hidden="true" /> */}
                 </div>
                 <p className="font-body max-w-sm text-sm leading-relaxed text-white/70 sm:text-base lg:flex-1">{description}</p>
                 <div className="flex flex-wrap gap-2 lg:w-[29%] lg:justify-end">

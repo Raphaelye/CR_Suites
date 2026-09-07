@@ -14,7 +14,6 @@ const reveal: Variants = {
 function ProjectCard({ projectId }: { projectId: string }) {
   const project = useProjectsStore((state) => state.projects.find((item) => item._id === projectId))
   const [isTouchDevice, setIsTouchDevice] = useState(false)
-  const [isOverlayOpen, setIsOverlayOpen] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
@@ -36,7 +35,6 @@ function ProjectCard({ projectId }: { projectId: string }) {
     demo: 'Build · Demo',
   }[project.buildType] : 'Build · Unknown'
   const projectDescription = project.description
-  const overlayVisible = isTouchDevice && isOverlayOpen
 
   return (
     <>
@@ -44,10 +42,8 @@ function ProjectCard({ projectId }: { projectId: string }) {
         className="group relative flex min-w-0 flex-1 basis-72 flex-col overflow-hidden rounded-3xl border border-white/15 bg-glass-bg sm:basis-80 lg:basis-[calc(50%-0.75rem)] xl:basis-[calc(33.333%-1rem)]"
         variants={reveal}
         layout
-        onClick={(event) => {
-          if (!isTouchDevice || (event.target instanceof Element && event.target.closest('button, a'))) return
-
-          setIsOverlayOpen((previous) => !previous)
+        onClick={() => {
+          if (isTouchDevice) setIsModalOpen(true)
         }}
       >
         <div className="relative aspect-video overflow-hidden bg-white/5">
@@ -62,14 +58,14 @@ function ProjectCard({ projectId }: { projectId: string }) {
           )}
 
           <div
-            className={`pointer-events-none absolute inset-0 bg-black/80 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 ${overlayVisible ? 'opacity-100' : ''}`}
+            className="pointer-events-none absolute inset-0 bg-black/80 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
           />
 
           <span className="absolute left-3 top-3 z-20 inline-flex rounded-full border border-white/20 bg-black/60 px-3 py-2 font-body text-[8px] md:text-[10px] uppercase tracking-[0.16em] text-accent backdrop-blur-sm">
             {projectBadge}
           </span>
 
-          <div className={`pointer-events-none absolute inset-0 z-20 md:mb-5 flex gap-5 items-end justify-between p-4 md:p-5 opacity-0 transition-opacity duration-500 ease-out group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100 sm:p-5 ${overlayVisible ? 'pointer-events-auto opacity-100' : ''}`}>
+          <div className="pointer-events-none absolute inset-0 z-20 md:mb-5 flex gap-5 items-end justify-between p-4 md:p-5 opacity-0 transition-opacity duration-500 ease-out group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100 sm:p-5">
             <div className="flex flex-col justify-end gap-2">
               <h3 className="font-display text-sm sm:text-base md:text-xl lg:text-3xl uppercase text-white">{project.title}</h3>
               <p className="font-body max-w-sm md:max-w-xl text-[11px] md:text-base text-muted leading-4 md:leading-relaxed tracking-wide line-clamp-2">{projectDescription}</p>
