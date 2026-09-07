@@ -44,8 +44,10 @@ function ProjectCard({ projectId }: { projectId: string }) {
         className="group relative flex min-w-0 flex-1 basis-72 flex-col overflow-hidden rounded-3xl border border-white/15 bg-glass-bg sm:basis-80 lg:basis-[calc(50%-0.75rem)] xl:basis-[calc(33.333%-1rem)]"
         variants={reveal}
         layout
-        onClick={() => {
-          if (isTouchDevice) setIsOverlayOpen((previous) => !previous)
+        onClick={(event) => {
+          if (!isTouchDevice || (event.target instanceof Element && event.target.closest('button, a'))) return
+
+          setIsOverlayOpen((previous) => !previous)
         }}
       >
         <div className="relative aspect-video overflow-hidden bg-white/5">
@@ -76,6 +78,7 @@ function ProjectCard({ projectId }: { projectId: string }) {
               <button
                 type="button"
                 aria-label={`View case study for ${project.title}`}
+                onPointerDown={(event) => event.stopPropagation()}
                 onClick={(event) => {
                   event.stopPropagation()
                   setIsModalOpen(true)
