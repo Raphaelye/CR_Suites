@@ -78,7 +78,7 @@ function ProjectDetailsPanel({ project, isOpen, onClose }: ProjectDetailsPanelPr
 
   if (!project) return null
 
-  const projectBadge = project.buildType ? buildTypeLabels[project.buildType] : 'Build · Personal'
+  const projectBadge = project.buildType ? buildTypeLabels[project.buildType] : 'Build · Unknown'
   const projectDescription = project.description
   const heroImage = projectImageUrl(project.cardImage ?? project.thumbnail)
   const galleryImages = (project.gallery ?? []).map((image) => projectImageUrl(image))

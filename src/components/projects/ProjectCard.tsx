@@ -34,7 +34,7 @@ function ProjectCard({ projectId }: { projectId: string }) {
     personal: 'Build · Personal',
     client: 'Build · Client',
     demo: 'Build · Demo',
-  }[project.buildType] : 'Build · Personal'
+  }[project.buildType] : 'Build · Unknown'
   const projectDescription = project.description
   const overlayVisible = isTouchDevice && isOverlayOpen
 
@@ -67,7 +67,7 @@ function ProjectCard({ projectId }: { projectId: string }) {
             {projectBadge}
           </span>
 
-          <div className={`pointer-events-none absolute inset-0 z-20 md:mb-5 flex gap-5 items-end justify-between p-4 md:p-5 opacity-0 transition-opacity duration-500 ease-out group-hover:pointer-events-auto group-hover:opacity-100 sm:p-5 ${overlayVisible ? 'pointer-events-auto opacity-100' : ''}`}>
+          <div className={`pointer-events-none absolute inset-0 z-20 md:mb-5 flex gap-5 items-end justify-between p-4 md:p-5 opacity-0 transition-opacity duration-500 ease-out group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100 sm:p-5 ${overlayVisible ? 'pointer-events-auto opacity-100' : ''}`}>
             <div className="flex flex-col justify-end gap-2">
               <h3 className="font-display text-sm sm:text-base md:text-xl lg:text-3xl uppercase text-white">{project.title}</h3>
               <p className="font-body max-w-sm md:max-w-xl text-[11px] md:text-base text-muted leading-4 md:leading-relaxed tracking-wide line-clamp-2">{projectDescription}</p>
