@@ -21,14 +21,14 @@ function ProjectsSection() {
       <div className="pointer-events-none absolute -left-40 top-36 h-96 w-96 rounded-full border border-accent/15" />
       <div className="relative z-10 mx-auto max-w-7xl">
         <motion.header
-          className="flex flex-col gap-8 border-b border-white/15 pb-10 sm:gap-12 sm:pb-14 lg:flex-row lg:items-end lg:justify-between"
+          className="flex flex-col gap-6 border-b border-white/15 pb-10 sm:gap-12 sm:pb-10 lg:flex-row lg:items-end lg:justify-between"
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="max-w-4xl">
             <p className="font-body mb-5 text-xs font-medium uppercase tracking-[0.28em] text-accent sm:text-sm">03 / Selected work</p>
-            <h1 className="font-display text-4xl uppercase leading-[0.95] text-white sm:text-7xl lg:text-6xl">
+            <h1 className="font-display text-4xl uppercase leading-[0.95] text-white sm:text-5xl lg:text-6xl">
               Many ways to <span className="text-accent">make.</span>
             </h1>
           </div>
