@@ -44,7 +44,6 @@ export const projectType = defineType({
         ],
         layout: 'radio',
       },
-      initialValue: 'personal',
       validation: (rule) => rule.required(),
     }),
     defineField({
