@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import { motion } from 'framer-motion'
+import logo from '../assets/CRlogo.png'
 
 type TopNavbarProps = {
   onOpenContact: () => void
@@ -28,7 +29,7 @@ function TopNavbar({ onOpenContact }: TopNavbarProps) {
         to="/"
         aria-label="CleverRaph home"
       >
-        <img src="./src/assets/CRlogo.png" alt="CR Logo" className="h-10 w-auto md:h-11 lg:h-15" />
+        <img src={logo} alt="CR Logo" className="h-10 w-auto md:h-11 lg:h-15" />
         <span className="font-body max-w-0 overflow-hidden whitespace-nowrap text-xl font-medium text-muted opacity-0 transition-all duration-500 ease-out group-hover:ml-3 group-hover:max-w-32 group-hover:opacity-100">
           CleverRaph
         </span>
