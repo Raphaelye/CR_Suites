@@ -2,13 +2,30 @@ import { createClient } from '@sanity/client'
 import { createImageUrlBuilder } from '@sanity/image-url'
 import type { Image } from '@sanity/types'
 
+export type SanityImage = Image
+
+export type SanityProcessStep = {
+  _key?: string
+  stepTitle: string
+  stepDescription: string
+}
+
 export type SanityProject = {
   _id: string
   title: string
   slug?: { current: string }
   category: 'ui-ux' | 'apps' | 'web'
+  buildType?: 'personal' | 'client' | 'demo'
   description: string
-  thumbnail?: Image
+  overview?: string
+  role?: string
+  stack?: string[]
+  problem?: string
+  process?: SanityProcessStep[]
+  thumbnail?: SanityImage
+  cardImage?: SanityImage
+  gallery?: SanityImage[]
+  outcome?: string
   liveUrl?: string
   caseStudyUrl?: string
   featured?: boolean
@@ -56,8 +73,17 @@ export async function fetchProjects() {
     title,
     slug,
     category,
+    buildType,
     description,
+    overview,
+    role,
+    stack,
+    problem,
+    process[]{_key, stepTitle, stepDescription},
     thumbnail,
+    cardImage,
+    gallery,
+    outcome,
     liveUrl,
     caseStudyUrl,
     featured

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import { motion } from 'framer-motion'
 
@@ -6,9 +7,20 @@ type TopNavbarProps = {
 }
 
 function TopNavbar({ onOpenContact }: TopNavbarProps) {
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 1)
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <nav
-      className="fixed left-1/2 top-5 w-[90%] z-50 flex justify-between -translate-x-1/2 items-center gap-10 rounded-full px-4 py-3 backdrop-blur-xl sm:top-6 sm:gap-20 sm:px-6 sm:py-4"
+      className={`fixed left-1/2 z-50 flex w-[90%] -translate-x-1/2 items-center justify-between gap-10 rounded-full px-4 py-3 backdrop-blur-xl transition-[top] duration-500 ease-out sm:gap-20 sm:px-6 sm:py-4 ${isScrolled ? 'top-0 sm:top-0' : 'top-5 sm:top-6'}`}
       aria-label="Site navigation"
     >
       <Link

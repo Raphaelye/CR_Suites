@@ -135,12 +135,7 @@ function Home() {
           </motion.div>
          
         </div>
-
-
-        <div className="flex items-center justify-between pb-6 font-body text-xs uppercase tracking-[0.16em] text-white/50">
-          <span>Independent creative studio</span>
-          <span>01 / 04</span>
-        </div>
+        
       </section>
 
 
