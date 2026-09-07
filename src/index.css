@@ -17,6 +17,69 @@
   --page-padding: clamp(1.25rem, 5vw, 6rem);
 }
 
+@media (max-width: 374px) {
+  :root {
+    --page-padding: 0.875rem;
+  }
+
+  html {
+    font-size: 14px;
+  }
+
+  body {
+    letter-spacing: -0.01em;
+  }
+
+  .page-padding {
+    padding-left: var(--page-padding);
+    padding-right: var(--page-padding);
+  }
+
+  .text-xs {
+    font-size: 0.625rem !important;
+  }
+
+  .text-sm {
+    font-size: 0.75rem !important;
+  }
+
+  .text-base {
+    font-size: 0.875rem !important;
+  }
+
+  .text-lg {
+    font-size: 0.9375rem !important;
+  }
+
+  .text-2xl {
+    font-size: clamp(1.35rem, 7vw, 1.7rem) !important;
+  }
+
+  .text-3xl {
+    font-size: clamp(1.75rem, 9vw, 2.3rem) !important;
+  }
+
+  .text-4xl {
+    font-size: clamp(2.2rem, 12vw, 2.8rem) !important;
+  }
+
+  .text-5xl {
+    font-size: clamp(2.45rem, 13vw, 3rem) !important;
+  }
+
+  .text-6xl {
+    font-size: clamp(2.8rem, 15vw, 3.65rem) !important;
+  }
+
+  .text-7xl {
+    font-size: clamp(3.15rem, 16vw, 4.1rem) !important;
+  }
+
+  .text-8xl {
+    font-size: clamp(3.3rem, 17vw, 4.4rem) !important;
+  }
+}
+
 /* Space Grotesk */
 @font-face {
   font-family: 'Space Grotesk';
