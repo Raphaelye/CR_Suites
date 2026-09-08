@@ -21,7 +21,7 @@ function TopNavbar({ onOpenContact }: TopNavbarProps) {
 
   return (
     <nav
-      className={`fixed left-1/2 z-50 flex w-[90%] -translate-x-1/2 items-center justify-between gap-10 rounded-full px-4 py-3 backdrop-blur-xl transition-[top] duration-500 ease-out sm:gap-20 sm:px-6 sm:py-4 ${isScrolled ? 'top-0 sm:top-0' : 'top-5 sm:top-6'}`}
+      className={`fixed left-1/2 z-50 flex w-[94%] -translate-x-1/2 items-center justify-between gap-3 rounded-full px-3 py-2 backdrop-blur-xl transition-[top] duration-500 ease-out sm:w-[90%] sm:gap-20 sm:px-6 sm:py-4 ${isScrolled ? 'top-0 sm:top-0' : 'top-3 sm:top-6'}`}
       aria-label="Site navigation"
     >
       <Link
@@ -29,7 +29,7 @@ function TopNavbar({ onOpenContact }: TopNavbarProps) {
         to="/"
         aria-label="CleverRaph home"
       >
-        <img src={logo} alt="CR Logo" className="h-10 w-auto md:h-11 lg:h-15" />
+        <img src={logo} alt="CR Logo" className="h-8 w-auto sm:h-10 md:h-11 lg:h-15" />
         <span className="font-body max-w-0 overflow-hidden whitespace-nowrap text-xl font-medium text-muted opacity-0 transition-all duration-500 ease-out group-hover:ml-3 group-hover:max-w-32 group-hover:opacity-100">
           CleverRaph
         </span>
@@ -44,7 +44,7 @@ function TopNavbar({ onOpenContact }: TopNavbarProps) {
         />
         <button
           type="button"
-          className="font-body cursor-pointer text-sm font-medium text-white transition-colors hover:text-accent md:text-md lg:text-base"
+          className="font-body cursor-pointer text-xs font-medium text-white transition-colors hover:text-accent sm:text-sm md:text-md lg:text-base"
           onClick={onOpenContact}
         >
           Open to Work

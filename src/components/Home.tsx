@@ -12,6 +12,7 @@ import {
   IoTimeOutline,
 } from 'react-icons/io5';
 import { LuArrowUpRight, LuAward } from 'react-icons/lu'
+import cv from '../assets/Kesit_Udofia_CV.pdf'
 
 const heroContainer: Variants = {
   hidden: {},
@@ -51,42 +52,36 @@ function Home() {
     <>
       <section
         id="home"
-        className="relative isolate flex h-dvh min-h-0 flex-col overflow-hidden bg-bg page-padding "
+        className="hero-depth relative isolate flex h-dvh min-h-0 flex-col overflow-hidden page-padding "
       >
         <img
           src={bgAvatar}
           alt=""
-          className="pointer-events-none absolute bottom-0 right-[-55%] z-0 h-[90vh] max-w-none object-cover object-bottom opacity-65 sm:right-[-20%] sm:h-[90vh] lg:right-[10%] lg:h-[95vh]"
+          className="pointer-events-none absolute bottom-0 right-[-58%] z-0 h-[80vh] max-w-none object-cover object-bottom opacity-65 sm:right-[-20%] sm:h-[90vh] lg:right-[10%] lg:h-[95vh]"
         />
         <div className="pointer-events-none absolute inset-0 z-1 bg-[rgba(0,0,0,0.45)]" />
 
         <motion.div
-          className="relative z-10 flex min-h-0 flex-1 items-center py-10 pt-28 sm:py-16 sm:pt-32"
+          className="relative z-10 flex min-h-0 flex-1 items-center py-8 pt-24 sm:py-16 sm:pt-32"
           variants={heroContainer}
           initial="hidden"
           animate="visible"
         >
-          <div className="max-w-9xl">
+          <div className="max-w-none">
             <motion.p
-              className="font-body mb-5 text-sm font-medium uppercase tracking-[0.28em] text-accent sm:text-md"
+              className="font-body mb-4 text-xs font-medium uppercase tracking-[0.28em] text-accent sm:mb-5 sm:text-md"
               variants={heroItem}
             >
               Plan | Design | Code
             </motion.p>
-            <h1 className="font-display max-w-4xl text-4xl leading-[0.98] uppercase sm:text-7xl lg:text-8xl">
-              <span className="mr-2 inline-block overflow-hidden pb-1 align-bottom sm:mr-4">
-                <motion.span className="inline-block" variants={titleWord}>
-                  Clever
-                </motion.span>
-              </span>
-              <span className="inline-block overflow-hidden pb-1 align-bottom">
-                <motion.span className="inline-block text-accent" variants={titleWord}>
-                  Raph.
-                </motion.span>
-              </span>
+            <h1 className="display-highlight font-display max-w-none text-3xl leading-[0.98] uppercase sm:text-7xl lg:whitespace-nowrap lg:text-8xl">
+              <motion.span className="inline-block overflow-hidden pb-1 align-bottom" variants={titleWord}>
+                <span className="mr-2 sm:mr-4">Clever</span>
+                <span className="text-accent">Raph.</span>
+              </motion.span>
             </h1>
             <motion.p
-              className="font-body mt-4 max-w-xl text-sm leading-relaxed text-white sm:text-lg "
+              className="font-body mt-5 max-w-lg text-sm leading-relaxed text-white sm:text-lg"
               variants={heroItem}
             >
               I specialize in creating fullstack and responsive websites, web applications, and mobile apps that meet the needs of businesses and individuals alike.
@@ -94,27 +89,27 @@ function Home() {
 
 
             <motion.div
-              className="font-body mt-15 text-sm gap-6 flex flex-col text-white/80 sm:text-base"
+              className="font-body mt-10 flex flex-col gap-4 text-sm text-white/80 sm:mt-15 sm:gap-6 sm:text-base"
               variants={heroItem}
             >
-              <div className="flex-row gap-5 flex flex-wrap justify-start items-center">
+              <div className="flex flex-wrap items-center gap-3 sm:gap-5">
                 <a
                   className="flex items-center gap-1 transition-colors hover:text-accent"
                   href="https://wa.me/+2348083044373"
                 >
-                  <IoCallOutline size={22} className="shrink-0 text-accent" aria-hidden="true" />
+                  <IoCallOutline size={20} className="shrink-0 text-accent sm:size-5.5" aria-hidden="true" />
                   <span>+234 808-3044-373</span>
                 </a>
                 <a
                   className="flex items-center gap-1 transition-colors hover:text-accent"
                   href="mailto:cleveraph@gmail.com"
                 >
-                  <IoMailOutline size={22} className="shrink-0 text-accent" aria-hidden="true" />
+                  <IoMailOutline size={20} className="shrink-0 text-accent sm:size-5.5" aria-hidden="true" />
                   <span>cleveraph@gmail.com</span>
                 </a>
               </div>
               <div className="flex items-center gap-1">
-                <IoLocationOutline size={22} className="shrink-0 text-accent" aria-hidden="true" />
+                <IoLocationOutline size={20} className="shrink-0 text-accent sm:size-5.5" aria-hidden="true" />
                 <span>Akwa Ibom, Nigeria</span>
               </div>
             </motion.div>
@@ -140,7 +135,7 @@ function Home() {
 
 
 {/* ABOUT SECTION ========================================================================*/}
-      <section id="about" className="relative isolate min-h-dvh overflow-hidden bg-bg page-padding py-28 md:py-27 sm:py-25 lg:py-40 ">
+      <section id="about" className="section-depth relative isolate min-h-dvh overflow-hidden page-padding py-28 md:py-27 sm:py-25 lg:py-40 ">
         <div className="pointer-events-none absolute -right-24 top-2 h-72 w-72 rounded-full border border-accent/20 sm:h-100 sm:w-100" />
 
         <motion.div
@@ -156,7 +151,7 @@ function Home() {
           </motion.div>
 
           <div className="flex flex-col items-center gap-12 mx-auto max-w-7xl lg:flex-row lg:items-center lg:gap-30">
-            <motion.div className="relative mx-auto w-full max-w-md shrink-0 lg:mx-0 lg:w-[42%]" variants={heroItem}>
+            <motion.div className="relative mx-auto w-[88%] max-w-sm shrink-0 sm:w-full sm:max-w-md lg:mx-0 lg:w-[42%]" variants={heroItem}>
               <div className="absolute -left-5 -top-5 h-full w-full border border-accent/40 sm:-left-7 sm:-top-7" />
               <div className="relative aspect-639/723 overflow-hidden bg-[#151515]">
                 <img src={aboutImage} alt="CleverRaph seated in a black suit" className="h-full w-full object-cover object-top grayscale" />
@@ -167,8 +162,8 @@ function Home() {
               </div>
               <div className="absolute -bottom-7 -right-4 flex h-22 w-22 flex-col items-center justify-center rounded-full border border-accent">
                 <a
-                  href="/cv.pdf"
-                  download
+                  href={cv}
+                  target="_blank"
                   aria-label="Download CleverRaph CV"
                   className=" flex h-20 w-20 flex-col items-center justify-center rounded-full bg-accent text-center font-body text-[10px] font-semibold uppercase leading-tight tracking-[0.08em] text-black transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:-right-8"
                 >
@@ -180,7 +175,7 @@ function Home() {
 
             <motion.div className="w-full" variants={heroItem}>
               <p className="font-body mb-4 text-sm uppercase tracking-[0.2em] text-accent">Who I am</p>
-              <h2 className="font-display max-w-3xl text-4xl uppercase leading-[0.95] text-white sm:text-6xl lg:text-7xl">
+              <h2 className="display-highlight font-display max-w-3xl text-3xl uppercase leading-[0.95] text-white sm:text-6xl lg:text-7xl">
                 I turn ideas into <span className="text-accent">realities.</span>
               </h2>
               <div className="mt-8 flex flex-col gap-6 border-t border-white/15 pt-7 sm:flex-row sm:gap-10">
@@ -194,13 +189,15 @@ function Home() {
             </motion.div>
           </div>
 
-          <motion.div className="mt-24 flex flex-col border-y border-white/15 sm:flex-row" variants={heroItem}>
+          <motion.div className="mt-24 grid gap-4 sm:grid-cols-3" variants={heroItem}>
             {achievementStats.map(({ number, title, icon: Icon }) => (
-              <div key={number} className="flex flex-1 items-center  gap-4 border-b border-white/15 py-6 last:border-0 sm:border-b-0 sm:border-r sm:px-7 sm:first:pl-0 sm:last:border-r-0 sm:last:pr-0 md:justify-center" >
-                <Icon size={28} className="shrink-0 text-accent" aria-hidden="true" />
+              <div key={number} className="about-stat group flex items-center gap-4 rounded-[1.25rem] border border-white/10 p-5 transition-colors duration-300 sm:flex-col sm:items-start sm:gap-8 sm:p-7" >
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-accent/40 bg-accent/10 text-accent transition-colors group-hover:bg-accent group-hover:text-black">
+                  <Icon size={23} aria-hidden="true" />
+                </div>
                 <div>
-                  <p className="font-display text-2xl uppercase text-white sm:text-3xl">{number}</p>
-                  <h3 className="font-body mt-1 text-xs uppercase tracking-[0.14em] text-muted">{title}</h3>
+                  <p className="font-display text-3xl uppercase leading-none text-white sm:text-4xl">{number}</p>
+                  <h3 className="font-body mt-2 text-xs uppercase tracking-[0.14em] text-muted">{title}</h3>
                 </div>
               </div>
             ))}

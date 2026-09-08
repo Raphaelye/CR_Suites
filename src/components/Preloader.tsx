@@ -14,7 +14,7 @@ function Preloader() {
     >
       <div className="relative flex h-40 w-40 items-center justify-center sm:h-48 sm:w-48">
         <motion.div
-          className="absolute inset-0 rounded-full border border-accent/20"
+          className="absolute inset-0 rounded-full border border-accent/20 border-t-accent"
           animate={{ rotate: 360 }}
           transition={{ duration: 8, repeat: shouldReduceMotion ? 0 : Infinity, ease: 'linear' }}
         />

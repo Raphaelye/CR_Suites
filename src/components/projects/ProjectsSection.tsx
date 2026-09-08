@@ -17,7 +17,7 @@ function ProjectsSection() {
   }, [fetchProjects])
 
   return (
-    <main id="projects" className="relative isolate overflow-hidden bg-bg page-padding pb-32 pt-32 sm:pt-40 lg:pb-48">
+    <main id="projects" className="content-depth relative isolate overflow-hidden page-padding pb-32 pt-32 sm:pt-40 lg:pb-48">
       <div className="pointer-events-none absolute -left-40 top-36 h-96 w-96 rounded-full border border-accent/15" />
       <div className="relative z-10 mx-auto max-w-7xl">
         <motion.header
@@ -28,7 +28,7 @@ function ProjectsSection() {
         >
           <div className="max-w-4xl">
             <p className="font-body mb-5 text-xs font-medium uppercase tracking-[0.28em] text-accent sm:text-sm">03 / Selected work</p>
-            <h1 className="font-display text-4xl uppercase leading-[0.95] text-white sm:text-5xl lg:text-6xl">
+            <h1 className="display-highlight font-display text-3xl uppercase leading-[0.95] text-white sm:text-5xl lg:text-6xl">
               Many ways to <span className="text-accent">make.</span>
             </h1>
           </div>
@@ -37,7 +37,7 @@ function ProjectsSection() {
           </p>
         </motion.header>
 
-        <section className="mt-8 flex flex-col gap-8 sm:mt-12 sm:gap-10" aria-label="Projects">
+        <section className="mt-6 flex flex-col gap-6 sm:mt-12 sm:gap-10" aria-label="Projects">
           <ProjectFilterTabs />
           {isLoading && !hasFetched ? (
             <div className="flex min-h-80 items-center justify-center border border-white/15 font-body text-sm uppercase tracking-[0.2em] text-muted" role="status">Loading projects...</div>
