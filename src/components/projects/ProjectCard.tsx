@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { lazy, memo, Suspense, useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import type { Variants } from 'framer-motion'
 import { IoExpandOutline } from 'react-icons/io5'
-import ProjectDetailsPanel from './ProjectDetailsPanel'
 import { projectImageUrl } from '../../lib/sanity'
 import { useProjectsStore } from '../../stores/useProjectsStore'
+
+const ProjectDetailsPanel = lazy(() => import('./ProjectDetailsPanel'))
 
 const reveal: Variants = {
   hidden: { opacity: 0, y: 18 },
@@ -26,9 +27,12 @@ function ProjectCard({ projectId }: { projectId: string }) {
     return () => mediaQuery.removeEventListener('change', updateTouchDevice)
   }, [])
 
-  if (!project) return null
+  const imageUrl = useMemo(
+    () => projectImageUrl(project?.cardImage ?? project?.thumbnail),
+    [project?.cardImage, project?.thumbnail],
+  )
 
-  const imageUrl = projectImageUrl(project.cardImage ?? project.thumbnail)
+  if (!project) return null
   const projectBadge = project.buildType ? {
     personal: 'Build · Personal',
     client: 'Build · Client',
@@ -87,9 +91,11 @@ function ProjectCard({ projectId }: { projectId: string }) {
           </div>
         </div>
       </motion.article>
-      <ProjectDetailsPanel project={project} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <Suspense fallback={null}>
+        <ProjectDetailsPanel project={project} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      </Suspense>
     </>
   )
 }
 
-export default ProjectCard
+export default memo(ProjectCard)

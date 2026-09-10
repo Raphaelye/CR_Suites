@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState, useRef } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { IoArrowForward, IoCloseOutline, IoMailOutline } from 'react-icons/io5'
 
-import emailjs from '@emailjs/browser';
+let emailJsModulePromise: Promise<typeof import('@emailjs/browser')> | null = null
 
 type ContactModalProps = {
   isOpen: boolean
@@ -93,7 +93,7 @@ function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const template_id = import.meta.env.VITE_TEMPLATE_ID;
   const public_key = import.meta.env.VITE_PUBLIC_KEY;
 
-  const sendEmail: NonNullable<React.ComponentProps<'form'>['onSubmit']> = (event) => {
+  const sendEmail: NonNullable<React.ComponentProps<'form'>['onSubmit']> = async (event) => {
     event.preventDefault()
 
     if (!form.current || isSubmitting) return
@@ -103,24 +103,26 @@ function ContactModal({ isOpen, onClose }: ContactModalProps) {
     setIsSubmitting(true)
     setErrorMessage('')
 
-    emailjs.sendForm(service_id, template_id, form.current, { publicKey: public_key })
-      .then(() => {
-        if (submissionId.current !== currentSubmissionId) return
+    try {
+      emailJsModulePromise ??= import('@emailjs/browser')
+      const emailjs = await emailJsModulePromise
 
-        setFormData({ name: '', email: '', message: '' })
-        setIsSent(true)
-      })
-      .catch(() => {
-        if (submissionId.current !== currentSubmissionId) return
+      await emailjs.default.sendForm(service_id, template_id, form.current, { publicKey: public_key })
 
-        setErrorMessage('Something went wrong. Please try again.')
-        setIsSent(false)
-      })
-      .finally(() => {
-        if (submissionId.current !== currentSubmissionId) return
+      if (submissionId.current !== currentSubmissionId) return
 
-        setIsSubmitting(false)
-      })
+      setFormData({ name: '', email: '', message: '' })
+      setIsSent(true)
+    } catch {
+      if (submissionId.current !== currentSubmissionId) return
+
+      setErrorMessage('Something went wrong. Please try again.')
+      setIsSent(false)
+    }
+
+    if (submissionId.current === currentSubmissionId) {
+      setIsSubmitting(false)
+    }
   }
 
   return (

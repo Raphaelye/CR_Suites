@@ -1,14 +1,15 @@
 
-import { useEffect, useState } from "react"
+import { lazy, Suspense, useEffect, useState } from "react"
 import { AnimatePresence } from "framer-motion"
 import { BrowserRouter, Route, Routes, useLocation } from "react-router"
-import Home from "./components/Home"
-import Navbar from "./components/Navbar"
-import TopNavbar from "./components/TopNavbar"
-import Tools from "./components/Tools"
-import Projects from "./components/Projects"
-import Preloader from "./components/Preloader"
-import ContactModal from "./components/ContactModal"
+
+const Home = lazy(() => import("./components/Home"))
+const Navbar = lazy(() => import("./components/Navbar"))
+const TopNavbar = lazy(() => import("./components/TopNavbar"))
+const Tools = lazy(() => import("./components/Tools"))
+const Projects = lazy(() => import("./components/Projects"))
+const Preloader = lazy(() => import("./components/Preloader"))
+const ContactModal = lazy(() => import("./components/ContactModal"))
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -43,14 +44,16 @@ function App() {
       <AnimatePresence>{isLoading && <Preloader />}</AnimatePresence>
       <ScrollToTop />
       <main className="overflow-x-hidden bg-bg text-white" inert={isLoading} aria-busy={isLoading}>
-        <TopNavbar onOpenContact={() => setIsContactOpen(true)} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/tools" element={<Tools />} />
-          <Route path="/projects" element={<Projects />} />
-        </Routes>
-        <Navbar />
-        <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
+        <Suspense fallback={null}>
+          <TopNavbar onOpenContact={() => setIsContactOpen(true)} />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/tools" element={<Tools />} />
+            <Route path="/projects" element={<Projects />} />
+          </Routes>
+          <Navbar />
+          <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
+        </Suspense>
       </main>
     </BrowserRouter>
   )

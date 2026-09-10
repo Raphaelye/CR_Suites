@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router'
 import { motion } from 'framer-motion'
 import logo from '../assets/CRlogo.png'
@@ -10,13 +10,27 @@ type TopNavbarProps = {
 function TopNavbar({ onOpenContact }: TopNavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false)
 
+  const frameRef = useRef<number | null>(null)
+
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 1)
+    const handleScroll = () => {
+      if (frameRef.current !== null) return
+
+      frameRef.current = window.requestAnimationFrame(() => {
+        setIsScrolled(window.scrollY > 1)
+        frameRef.current = null
+      })
+    }
 
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
 
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      if (frameRef.current !== null) {
+        window.cancelAnimationFrame(frameRef.current)
+      }
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [])
 
   return (
@@ -29,7 +43,7 @@ function TopNavbar({ onOpenContact }: TopNavbarProps) {
         to="/"
         aria-label="CleverRaph home"
       >
-        <img src={logo} alt="CR Logo" className="h-8 w-auto sm:h-10 md:h-11 lg:h-15" />
+        <img src={logo} alt="CR Logo" className="h-8 w-auto sm:h-10 md:h-11 lg:h-15" loading="lazy" decoding="async" />
         <span className="font-body max-w-0 overflow-hidden whitespace-nowrap text-xl font-medium text-muted opacity-0 transition-all duration-500 ease-out group-hover:ml-3 group-hover:max-w-32 group-hover:opacity-100">
           CleverRaph
         </span>

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { IoCloseOutline, IoOpenOutline } from 'react-icons/io5'
 import { createPortal } from 'react-dom'
@@ -20,6 +20,7 @@ type ProjectDetailsPanelProps = {
 function ProjectDetailsPanel({ project, isOpen, onClose }: ProjectDetailsPanelProps) {
   const dialogRef = useRef<HTMLElement | null>(null)
   const triggerRef = useRef<HTMLElement | null>(null)
+  const [expandedImage, setExpandedImage] = useState<string | null>(null)
 
   useEffect(() => {
     if (!isOpen) return
@@ -39,7 +40,14 @@ function ProjectDetailsPanel({ project, isOpen, onClose }: ProjectDetailsPanelPr
     })
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onClose()
+      if (event.key === 'Escape') {
+        if (expandedImage) {
+          setExpandedImage(null)
+        } else {
+          onClose()
+        }
+        return
+      }
 
       if (event.key !== 'Tab' || !dialogRef.current) return
 
@@ -74,14 +82,16 @@ function ProjectDetailsPanel({ project, isOpen, onClose }: ProjectDetailsPanelPr
       triggerRef.current?.focus()
       triggerRef.current = null
     }
-  }, [isOpen, onClose])
+  }, [expandedImage, isOpen, onClose])
 
   if (!project) return null
 
   const projectBadge = project.buildType ? buildTypeLabels[project.buildType] : 'Build · Unknown'
   const projectDescription = project.description
   const heroImage = projectImageUrl(project.cardImage ?? project.thumbnail)
-  const galleryImages = (project.gallery ?? []).map((image) => projectImageUrl(image))
+  const galleryImages = (project.gallery ?? [])
+    .map((image) => projectImageUrl(image))
+    .filter((image): image is string => Boolean(image))
   const externalLinks = [
     safeExternalUrl(project.liveUrl) ? { label: 'View live', href: safeExternalUrl(project.liveUrl) } : null,
     safeExternalUrl(project.caseStudyUrl) ? { label: 'Case study', href: safeExternalUrl(project.caseStudyUrl)} : null,
@@ -196,12 +206,19 @@ function ProjectDetailsPanel({ project, isOpen, onClose }: ProjectDetailsPanelPr
                   <p className="font-body text-[10px] font-medium uppercase tracking-[0.24em] text-accent">Gallery</p>
                   <div className="flex flex-wrap gap-3">
                     {galleryImages.map((image, index) => (
-                      <img
+                      <button
                         key={`${image}-${index}`}
-                        src={image}
-                        alt={`${project.title} gallery ${index + 1}`}
-                        className="h-28 w-full rounded-2xl border border-white/10 object-cover sm:w-[calc(50%-0.375rem)]"
-                      />
+                        type="button"
+                        onClick={() => setExpandedImage(image)}
+                        className="group w-full cursor-zoom-in rounded-2xl border border-white/10 text-left transition-colors hover:border-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:w-[calc(50%-0.375rem)]"
+                        aria-label={`Expand ${project.title} gallery image ${index + 1}`}
+                      >
+                        <img
+                          src={image}
+                          alt={`${project.title} gallery ${index + 1}`}
+                          className="h-auto w-full rounded-2xl object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                        />
+                      </button>
                     ))}
                   </div>
                 </section>
@@ -232,6 +249,37 @@ function ProjectDetailsPanel({ project, isOpen, onClose }: ProjectDetailsPanelPr
               ) : null}
             </div>
           </motion.aside>
+
+          <AnimatePresence>
+            {expandedImage ? (
+              <motion.div
+                className="fixed inset-0 z-210 flex items-center justify-center bg-black/90 p-5 backdrop-blur-sm sm:p-10"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.18 }}
+                onMouseDown={(event) => event.target === event.currentTarget && setExpandedImage(null)}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Expanded gallery image"
+              >
+                <button
+                  type="button"
+                  onClick={() => setExpandedImage(null)}
+                  className="absolute right-5 top-5 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white transition-colors hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:right-8 sm:top-8"
+                  aria-label="Close expanded image"
+                >
+                  <IoCloseOutline size={24} aria-hidden="true" />
+                </button>
+                <img
+                  src={expandedImage}
+                  alt={`${project.title} expanded gallery image`}
+                  className="max-h-full max-w-full object-contain"
+                  onMouseDown={(event) => event.stopPropagation()}
+                />
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
         </motion.div>
       )}
     </AnimatePresence>,
